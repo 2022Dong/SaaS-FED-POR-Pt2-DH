@@ -29,7 +29,7 @@
                         {{ __('New User') }}
                     </a>
 
-                    <a href="{{ route('users.index') }}" class="p-2 px-4 text-center rounded-md h-10                              
+                    <a href="{{ route('users.trash') }}" class="p-2 px-4 text-center rounded-md h-10                              
                               duration-300 ease-in-out transition-all space-x-2">
                         <i class="fa fa-trash font-xl"></i>
                         {{ __('Deleted') }}
@@ -78,12 +78,13 @@
                                     <i class="fa fa-pen text-lg"></i>
                                     <span class="sr-only">Edit</span>
                                 </a>
-                                <button type="submit" class="p-1 w-10 text-center rounded-md
+
+                                <a href="{{ route('user.delete', $user) }}" class="p-1 w-10 text-center rounded-md
                                                text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
                                                duration-300 ease-in-out transition-all">
                                     <i class="fa fa-trash text-lg"></i>
                                     <span class="sr-only">Delete</span>
-                                </button>
+                                </a>
                             </form>
                         </td>
                     </tr>
@@ -93,7 +94,11 @@
                     <tr>
                         <td colspan="4" class="py-1 px-2 bg-gray-200 dark:bg-gray-700
                                 border border-transparent border-t-gray-500">
-
+                            @if($users->hasPages())
+                            {{ $users->links() }}
+                            @else
+                            <small>No pages</small>
+                            @endif
                         </td>
                     </tr>
                 </tfoot>
