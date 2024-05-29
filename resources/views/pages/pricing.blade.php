@@ -4,7 +4,7 @@
             Pricing
         </h3>
         <p class=“text-center text-3xl my-8”>
-            Place holder for static pages FILENAME.
+            Place holder for static pages 'pricing.blade.php'.
         </p>
     </section>
 </x-guest-layout>
