@@ -19,9 +19,9 @@ class UserController extends Controller
     public function index(): View
     {
         //$users = User::all();
-        $users = User::paginate(5);
-        //$trashedCount = User::onlyTrashed()->latest()->get()->count();
-        //return view('users.index', compact(['users', 'trashedCount',]));
+        $users = User::paginate(10);
+        $trashedCount = User::onlyTrashed()->latest()->get()->count();
+        return view('users.index', compact(['users', 'trashedCount',]));
         return view('users.index', compact(['users',]));
     }
 
@@ -150,8 +150,8 @@ class UserController extends Controller
      */
     public function trash(): View
     {
-        $users = User::onlyTrashed()->orderBy('deleted_at')->paginate(5);
-        //$users = User::onlyTrashed()->latest()->get();
+        //$users->delete();
+        $users = User::onlyTrashed()->latest()->get();
         return view('users.trash', compact(['users']));
     }
 
@@ -175,7 +175,7 @@ class UserController extends Controller
      *
      * @return RedirectResponse
      */
-    public function recoverAll(): RedirectResponse
+    public function recover(): RedirectResponse
     {
         $users = User::onlyTrashed()->get();
         $trashCount = $users->count();

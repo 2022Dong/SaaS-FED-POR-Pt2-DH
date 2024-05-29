@@ -24,15 +24,16 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('users', UserController::class); // This adds the following users CRUD routes automatically.
-
     Route::get('users/{user}/delete', [UserController::class, 'delete'])->name('user.delete');
     // Trashed (Soft Deleted) users
     Route::get('users/trash', [UserController::class, 'trash'])->name('users.trash'); // Showing all users in the trash
-    Route::get('users/trash/recover', [UserController::class, 'recover'])->name('users.recover'); // Recover All users
-    Route::get('users/trash/{id}/recover', [UserController::class, 'recover'])->name('user.recover'); // Recover a user from trash
-    Route::get('users/trash/empty', [UserController::class, 'empty'])->name('users.empty'); // Emptying the trash
-    Route::get('users/trash{id}/empty', [UserController::class, 'empty'])->name('user.empty'); // Removing a SINGLE user from trash
+    Route::post('users/trash/recover', [UserController::class, 'recover'])->name('users.trash-recover'); // Recover All users
+    Route::get('users/trash/{id}/restore', [UserController::class, 'restore'])->name('users.trash-restore'); // Recover a user from trash
+    Route::delete('users/trash/empty', [UserController::class, 'empty'])->name('users.trash-empty'); // Emptying the trash
+    Route::delete('users/trash{id}/remove', [UserController::class, 'remove'])->name('users.trash-remove'); // Removing a SINGLE user from trash
+
+    // This below line of code needs to be after 'trash'.
+    Route::resource('users', UserController::class); // This adds the following users CRUD routes automatically.
 });
 
 require __DIR__ . '/auth.php';
