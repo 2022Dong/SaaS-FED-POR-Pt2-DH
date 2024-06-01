@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaticPages;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('welcome', [StaticPages::class, 'welcome'])->name('welcome');
@@ -36,4 +37,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class); // This adds the following users CRUD routes automatically.
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])->name('listing.delete');
+    // Trashed (Soft Deleted) users
+    Route::get('listings/trash', [ListingController::class, 'trash'])->name('listings.trash'); // Showing all users in the trash
+    Route::post('listings/trash/recover', [ListingController::class, 'recover'])->name('listings.trash-recover'); // Recover All users
+    Route::get('listings/trash/{id}/restore', [ListingController::class, 'restore'])->name('listings.trash-restore'); // Recover a user from trash
+    Route::delete('listings/trash/empty', [ListingController::class, 'empty'])->name('listings.trash-empty'); // Emptying the trash
+    Route::delete('listings/trash{id}/remove', [ListingController::class, 'remove'])->name('listings.trash-remove'); // Removing a SINGLE user from trash
+
+    Route::resource('listings', ListingController::class); // This adds the following listings CRUD routes automatically.
+});
 require __DIR__ . '/auth.php';
