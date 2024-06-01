@@ -9,7 +9,7 @@
                     {{ __('Dashboard') }}
                 </x-nav-link>
 
-                <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
+                <x-nav-link :href="route('listings.index')" :active="request()->routeIs('listings.*')" class="group">
                     {{ __('Listings') }}
                 </x-nav-link>
                 <x-nav-link :href="route('pricing')" :active="request()->routeIs('/')" class="group">
@@ -114,7 +114,7 @@
 
         </div>
 
-        <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="bg-yellow-500 focus:border-yellow-500 rounded-md
+        <x-responsive-nav-link :href="route('listings.create')" :active="request()->routeIs('listings.*')" class="bg-yellow-500 focus:border-yellow-500 rounded-md
                                       my-1">
             <i class="fa fa-edit mr-2"></i> {{ __('Post a Job') }}
         </x-responsive-nav-link>
