@@ -31,7 +31,15 @@ class UserSeeder extends Seeder
                 'name' => 'Adrian Gould',
                 'email' => 'adrian.gould@nmtafe.wa.edu.au',
                 'email_verified_at' => now()->subYears(5),
-                'password' => Hash::make('Password1'),
+                'password' => Hash::make('password'),
+            ],
+
+            [
+                'id' => 1000,
+                'name' => 'Dongyun',
+                'email' => '20127545@tafe.wa.edu.au',
+                'email_verified_at' => now()->subYears(5),
+                'password' => Hash::make('password'),
             ],
 
             [

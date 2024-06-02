@@ -21,9 +21,11 @@
 
                 @can('update', $listing)
                 <div class="flex space-x-4 ml-4">
-                    <a href="{{ route('listings.edit', $listing) }}" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">Edit</a>
+                    <a href="{{ route('listings.edit', $listing) }}" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">
+                        <i class="fa fa-pen text-lg"></i> Edit</a>
                     <!-- Confirm Delete -->
-                    <a href="{{ route('listing.delete', $listing) }}" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">Delete</a>
+                    <a href="{{ route('listing.delete', $listing) }}" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">
+                        <i class="fa fa-trash text-lg"></i> Delete</a>
                 </div>
                 @endcan
 
