@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Listing;
 use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class ListingController extends Controller
 {
@@ -86,8 +88,8 @@ class ListingController extends Controller
 
         $validated = $request->validate($rules);
 
-        // Add the authenticated user's ID to the validated data --chatgpt
-        $validated['user_id'] = auth()->id();
+        // Add the authenticated listing's ID to the validated data --chatgpt
+        $validated['listing_id'] = auth()->id();
 
         // Store
         $listing = Listing::create($validated);
@@ -197,7 +199,80 @@ class ListingController extends Controller
         $oldListing = $listing;
         $listing->delete();
 
-        return redirect(route('listings.index'))
+        return redirect(route('listings.trash'))
             ->withSuccess("Deleted {$oldListing->title}");
+    }
+
+    /**
+     * Return view showing all listings in the trash.
+     */
+    public function trash(): View
+    {
+        $listings = Listing::onlyTrashed()->latest()->get();
+        return view('listings.trash', compact(['listings']));
+    }
+
+    /**
+     * Recover a listing from trash
+     *
+     * @param string $id
+     * @return RedirectResponse
+     */
+    public function restore(string $id): RedirectResponse
+    {
+        $listing = Listing::onlyTrashed()->find($id);
+        $listing->restore();
+        return redirect()
+            ->back()
+            ->withSuccess("Restored {$listing->title}.");
+    }
+
+    /**
+     * Recover all listings in the trash to system
+     *
+     * @return RedirectResponse
+     */
+    public function recover(): RedirectResponse
+    {
+        $listings = Listing::onlyTrashed()->get();
+        $trashCount = $listings->count();
+
+        foreach ($listings as $listing) {
+            $listing->restore(); // This restores the soft-deleted listing
+        }
+        return redirect(route('listings.index'))
+            ->withSuccess("Successfully recovered {$trashCount} listings.");
+    }
+
+    /**
+     * Permanently removing a SINGLE listing from trash
+     *
+     * @param string $id
+     * @return RedirectResponse
+     */
+    public function remove(string $id): RedirectResponse
+    {
+        $listing = Listing::onlyTrashed()->find($id);
+        $oldListing = $listing;
+        $listing->forceDelete();
+        return redirect()
+            ->back()
+            ->withSuccess("Permanently Removed {$oldListing->title}.");
+    }
+
+    /**
+     * Permanently remove all listings that are in the trash
+     *
+     * @return RedirectResponse
+     */
+    public function empty(): RedirectResponse
+    {
+        $listings = Listing::onlyTrashed()->get();
+        $trashCount = $listings->count();
+        foreach ($listings as $listing) {
+            $listing->forceDelete(); // This restores the soft-deleted listing
+        }
+        return redirect(route('listings.trash'))
+            ->withSuccess("Successfully emptied trash of {$trashCount} listings.");
     }
 }

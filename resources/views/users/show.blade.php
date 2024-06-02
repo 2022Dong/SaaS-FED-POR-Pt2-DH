@@ -59,7 +59,7 @@
                     <a href="{{ route('users.edit', $user) }}" class="p-1 px-6 text-center rounded-md
                                       text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
                                       duration-300 ease-in-out transition-all">
-                        <i class="fa fa-save text-lg"></i>
+                        <i class="fa fa-pen text-lg"></i>
                         <span>Edit</span>
                     </a>
 
