@@ -1,23 +1,40 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StaticPages;
+use App\Http\Controllers\StaticPageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RolesAndPermissionsController;
 
-Route::get('welcome', [StaticPages::class, 'welcome'])->name('welcome');
+Route::get('welcome', [StaticPageController::class, 'welcome'])->name('welcome');
 
-Route::get('/', [StaticPages::class, 'welcome'])->name('home');
+Route::get('/', [StaticPageController::class, 'welcome'])->name('home');
 
-Route::get('/about', [StaticPages::class, 'about'])->name('about');
-Route::get('/contact-us', [StaticPages::class, 'contact'])->name('contact');
-Route::get('/pricing', [StaticPages::class, 'pricing'])->name('pricing');
+Route::get('/about', [StaticPageController::class, 'about'])->name('about');
+Route::get('/contact-us', [StaticPageController::class, 'contact'])->name('contact');
+Route::get('/pricing', [StaticPageController::class, 'pricing'])->name('pricing');
+
+// Administration Dashboard
+Route::get('/dashboard', [StaticPageController::class, 'admin'])
+    ->middleware(['auth', 'verified', 'role:Admin|Super-Admin'])
+    ->name('dashboard');
+
+
+// Members home page
+Route::group(
+    ['prefix' => 'members', 'middleware' => ['auth', 'verified', 'role:Member|Admin|Super-Admin']],
+    function () {
+        Route::get('/home', [StaticPageController::class, 'index'])
+            ->name('members.home');
+    }
+);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Logged in User Profile
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -48,4 +65,24 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('listings', ListingController::class); // This adds the following listings CRUD routes automatically.
 });
+
+
+// role-assignment screen
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => ['auth', 'verified', 'role:Admin|Super-Admin']
+], function () {
+
+    Route::get('/permissions', [RolesAndPermissionsController::class, 'index'])
+        ->name('admin.permissions');
+
+    Route::post('/assign_role', [RolesAndPermissionsController::class, 'store'])
+        ->name('admin.assign-role');
+
+    Route::delete('/revoke_role', [RolesAndPermissionsController::class, 'destroy'])
+        ->name('admin.revoke-role');
+
+    Route::resource('/users', UserController::class);
+});
+
 require __DIR__ . '/auth.php';

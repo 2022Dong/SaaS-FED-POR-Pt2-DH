@@ -32,7 +32,7 @@
                     <a href="{{ route('users.trash') }}" class="p-2 px-4 text-center rounded-md h-10                              
                               duration-300 ease-in-out transition-all space-x-2">
                         <i class="fa fa-trash font-xl"></i>
-                        {{ __('Deleted') }}
+                        {{ $trashedCount }} {{ __('Deleted') }}
                     </a>
                 </section>
             </header>

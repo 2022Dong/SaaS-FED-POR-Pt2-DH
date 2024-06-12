@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Ensures user_id is a foreign key and not null;
             $table->string('title');
             $table->text('description');
             $table->string('salary');
@@ -26,10 +26,7 @@ return new class extends Migration
             $table->string('email');
             $table->text('requirements');
             $table->text('benefits');
-            $table->timestamps(); // Created at and Updated at
-
-            // Add foreign key constraint
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps(); // created_at and updated_at
         });
     }
 

@@ -19,13 +19,19 @@
                     Back To Listings
                 </a>
 
-                @can('update', $listing)
+                @can('product-edit', $listing)
                 <div class="flex space-x-4 ml-4">
                     <a href="{{ route('listings.edit', $listing) }}" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">
                         <i class="fa fa-pen text-lg"></i> Edit</a>
                     <!-- Confirm Delete -->
                     <a href="{{ route('listing.delete', $listing) }}" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">
                         <i class="fa fa-trash text-lg"></i> Delete</a>
+                    <!-- Delete -->
+                    <a href="{{ route('listings.trash') }}" class="p-2 px-4 text-center rounded-md h-10                              
+                              duration-300 ease-in-out transition-all space-x-2">
+                        <i class="fa fa-trash font-xl"></i>
+                        {{ __('Deleted') }}
+                    </a>
                 </div>
                 @endcan
 

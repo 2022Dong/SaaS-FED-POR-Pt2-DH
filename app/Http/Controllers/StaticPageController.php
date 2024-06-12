@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class StaticPages extends Controller
+class StaticPageController extends Controller
 {
     // Add Welcome Method to the Class
     public function welcome()

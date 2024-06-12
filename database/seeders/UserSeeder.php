@@ -5,8 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -15,83 +15,72 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // get the Super Admin and Admin roles for the Administrator, Lecturer and Student
+        $roleSuperAdmin = Role::whereName('Super-Admin')->get();
+        $roleAdmin = Role::whereName('Admin')->get();
+        $roleMember = Role::whereName('Member')->get();
 
-        $defaultAdmin = [
-            'id' => 1,
+        // Create Super Admin User and assign the role to him.
+        $userAdmin = User::create([
+            'id' => 111,
             'name' => 'Administrator',
             'email' => 'admin@example.com',
-            'email_verified_at' => now()->subYears(5),
-            'password' => Hash::make('password'),
-        ];
+            'password' => Hash::make('Password1')
+        ]);
+        $userAdmin->assignRole([$roleSuperAdmin]);
+
+        // Create Second Super Admin
+        $userLecturer = User::create([
+            'id' => 500,
+            'name' => 'Adrian Gould',
+            'email' => 'adrian.gould@nmtafe.wa.edu.au',
+            'password' => Hash::make('Password1')
+        ]);
+        $userLecturer->assignRole([$roleSuperAdmin]);
 
 
-        $seedUsers = [
-            [
-                'id' => 1000,
-                'name' => 'Adrian Gould',
-                'email' => 'adrian.gould@nmtafe.wa.edu.au',
-                'email_verified_at' => now()->subYears(5),
-                'password' => Hash::make('password'),
-            ],
+        // Create Admin
+        $userStudent = User::create([
+            'id' => 501,
+            'name' => 'Dongyun Huang',
+            'email' => '20127545@example.com',
+            'password' => Hash::make('Password1')
+        ]);
+        $userStudent->assignRole([$roleAdmin]);
 
-            [
-                'id' => 1000,
-                'name' => 'Dongyun',
-                'email' => '20127545@tafe.wa.edu.au',
-                'email_verified_at' => now()->subYears(5),
-                'password' => Hash::make('password'),
-            ],
-
-            [
-                'id' => null, 'name' => "Bea O'Problem", 'email' => 'Bea.OProblem@example.com',
-                'email_verified_at' => null, 'password' => Hash::make('3454325326654665gfdgt'), 'created_at' =>
-                now(),
-            ],
-
-            [
-                'id' => null, 'name' => 'Oscar Nomination', 'email' => 'Oscar.Nomination@example.com',
-                'email_verified_at' => null, 'password' => Hash::make('hguishgr78enytigruighvihgru'), 'created_at' =>
-                now(),
-            ],
-
-            [
-                'id' => null, 'name' => 'Ken Dahl', 'email' => 'Ken.Dahl@example.com', 'email_verified_at' => null,
-                'password' => Hash::make('Password1'), 'created_at' => now(),
-            ],
-
-            [
-                'id' => null, 'name' => 'Barbie Dahl', 'email' => 'Barbie.Dahl@example.com',
-                'email_verified_at' => null, 'password' => Hash::make('tyruisytui4ytuiv7tv7tv744'), 'created_at' =>
-                now(),
-            ],
-
-            [
-                'id' => null, 'name' => 'Tim Burr', 'email' => 'Tim.Burr@example.com', 'email_verified_at' => null,
-                'password' => Hash::make('yarv4una7y74ayt74avynt7a4y7ty4v'), 'created_at' => now(),
-            ],
-            [
-                'id' => null, 'name' => 'Dwight House', 'email' => 'Dwight.House@example.com',
-                'email_verified_at' => null, 'password' => Hash::make('yv78br84vtcr84cgf4gf'), 'created_at' => now(),
-            ],
+        // Create Member
+        $userMember = User::create([
+            'id' => 502,
+            'name' => 'Member1',
+            'email' => 'member@example.com',
+            'password' => Hash::make('Password1')
+        ]);
+        $userMember->assignRole([$roleMember]);
 
 
-            [
-                'id' => null, 'name' => 'Isadora Bull', 'email' => 'Isadora.Bull@example.com',
-                'email_verified_at' => null, 'password' => Hash::make('vymn478btr8vrit4w'), 'created_at' => now(),
-            ],
-
-            [
-                'id' => null, 'name' => "Annie O'Problem", 'email' => 'Annie.OProblem@example.com',
-                'email_verified_at' => null, 'password' => Hash::make('vyn4uizoyt478vt478'), 'created_at' => now(),
-            ],
-
-        ];
+        // Create Guest (unverified user)
+        $userGuest = User::create([
+            'id' => 1000,
+            'name' => 'Dee Mouser',
+            'email' => 'dee.mouser@example.com',
+            'password' => Hash::make('Password1')
+        ]);
 
 
-        $admin = User::create($defaultAdmin);
+        $roleGuest = Role::create(['name' => 'Guest']);
+        $roleGuest->givePermissionTo('members');
+        $roleGuest->givePermissionTo('product-list');
+        $roleGuest->givePermissionTo('product-show');
 
-        foreach ($seedUsers as $seedUser) {
-            $user = User::create($seedUser);
-        }
+        $userGuest->assignRole([$roleGuest]);
+
+
+        // User::factory(10)->create();
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+            'password' => Hash::make('Password1'),
+        ]);
     }
 }
