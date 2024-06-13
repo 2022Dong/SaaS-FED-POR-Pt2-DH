@@ -1,11 +1,5 @@
 <x-admin-layout>
 
-    {{-- <x-slot name="header">
-        <h2 class="text-2xl text-amber-500">
-            User Role Editor
-        </h2>
-    </x-slot>  --}}
-
     <article class="relative flex flex-col min-w-0
                     rounded-lg break-words
                     bg-white

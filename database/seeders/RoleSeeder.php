@@ -13,23 +13,20 @@ class RoleSeeder extends Seeder
 {
 
     private $permissions = [
-        'role-assign',    'role-revoke',
-        'role-list',      'role-show',      'role-create',     'role-edit',      'role-delete',
-        'product-list',   'product-show',   'product-create',  'product-edit',   'product-delete',
-        'user-list',      'user-show',      'user-create',     'user-edit',      'user-delete',
-        'members',
+        'user-browse', 'user-show', 'user-edit', 'user-add', 'user-delete',
+        'user-trash-recover', 'user-trash-remove', 'user-trash-empty', 'user-trash-restore',
+        'listing-browse', 'listing-show', 'listing-edit', 'listing-add', 'listing-delete',
+        'listing-trash-recover', 'listing-trash-remove', 'listing-trash-empty', 'listing-trash-restore',
+        'role-assign', 'role-revoke', 'role-list', 'role-show', 'role-create', 'role-edit', 'role-delete'
     ];
-
 
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-
 
         // Create each of the permissions ready for role creation
         foreach ($this->permissions as $permission) {
@@ -43,27 +40,27 @@ class RoleSeeder extends Seeder
 
         // Generate the Admin Role
         $roleAdmin = Role::create(['name' => 'Admin']);
-        $roleAdmin->givePermissionTo('role-assign');
-        $roleAdmin->givePermissionTo('role-revoke');
-        $roleAdmin->givePermissionTo('product-list');
-        $roleAdmin->givePermissionTo('product-show');
-        $roleAdmin->givePermissionTo('product-create');
-        $roleAdmin->givePermissionTo('product-edit');
-        $roleAdmin->givePermissionTo('product-delete');
-        $roleAdmin->givePermissionTo('user-list');
-        $roleAdmin->givePermissionTo('user-edit');
-        $roleAdmin->givePermissionTo('user-show');
-        $roleAdmin->givePermissionTo('user-create');
-        $roleAdmin->givePermissionTo('user-delete');
-        $roleAdmin->givePermissionTo('members');
+        $roleAdmin->givePermissionTo([
+            'user-browse', 'user-show', 'user-edit', 'user-add', 'user-delete',
+            'user-trash-recover', 'user-trash-remove', 'user-trash-empty', 'user-trash-restore',
+            'listing-browse', 'listing-show', 'listing-edit', 'listing-delete',
+            'listing-trash-recover', 'listing-trash-remove', 'listing-trash-empty', 'listing-trash-restore',
+            'role-assign', 'role-revoke', 'role-list', 'role-show', 'role-create', 'role-edit', 'role-delete'
+        ]);
 
-        // Generate the Member role
-        $roleUser = Role::create(['name' => 'Member']);
-        $roleUser->givePermissionTo('product-list');
-        $roleUser->givePermissionTo('product-edit');
-        $roleUser->givePermissionTo('product-show');
-        $roleUser->givePermissionTo('product-create');
-        $roleUser->givePermissionTo('product-delete');
-        $roleUser->givePermissionTo('members');
+        // Generate the Staff role
+        $roleStaff = Role::create(['name' => 'Staff']);
+        $roleStaff->givePermissionTo([
+            'user-browse', 'user-show', 'user-edit', 'user-add', 'user-delete',
+            'listing-browse', 'listing-show', 'listing-edit', 'listing-delete',
+            'listing-trash-recover', 'listing-trash-remove'
+        ]);
+
+        // Generate the Client role
+        $roleClient = Role::create(['name' => 'Client']);
+        $roleClient->givePermissionTo([
+            'listing-browse', 'listing-show', 'listing-edit', 'listing-add', 'listing-delete',
+            'listing-trash-recover', 'listing-trash-remove'
+        ]);
     }
 }

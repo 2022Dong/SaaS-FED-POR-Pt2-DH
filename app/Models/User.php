@@ -11,14 +11,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 
-use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasRoles; // Spatie
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
     use SoftDeletes;
 
-    use HasRoles;
+    use HasRoles; // Saptie
 
     use Authorizable;
 

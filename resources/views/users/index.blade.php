@@ -62,10 +62,10 @@
                         <td class="py-2 text-left">{{ $user->email }}</td>
                         <td class="py-2 text-left">{{ $user->updated_at }}</td>
                         <td class="py-2 pr-2 text-right">
+                            @if(!$user->hasRole('Super-Admin'))
                             <form class="flex flex-row gap-2 items-center justify-end" action="{{ route('users.destroy', $user) }}" method="POST">
                                 @csrf
                                 @method('delete')
-
                                 <a href="{{ route('users.show', $user) }}" class="p-1 w-10 text-center rounded-md
                                           text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
                                           duration-300 ease-in-out transition-all">
@@ -85,6 +85,14 @@
                                     <i class="fa fa-trash text-lg"></i>
                                     <span class="sr-only">Delete</span>
                                 </a>
+                                @else
+                                <a href="{{ route('users.show', $user) }}" class="p-1 w-10 text-center rounded-md
+                                          text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
+                                          duration-300 ease-in-out transition-all">
+                                    <i class="fa fa-eye text-lg"></i>
+                                    <span class="sr-only hidden">View</span>
+                                </a>
+                                @endif
                             </form>
                         </td>
                     </tr>

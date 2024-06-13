@@ -25,13 +25,17 @@
                     <form method="POST" action="{{ route('listings.destroy', $listing) }}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">
+                        <button type="submit" class="p-1 px-2 text-center rounded-md
+                                           text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
+                                           duration-300 ease-in-out transition-all">
                             <i class="fa fa-trash text-lg"></i>
                             <span class="">Confirm Delete</span>
                         </button>
                     </form>
                     <!-- End Delete Form -->
-                    <a href="{{ route('listings.index') }}" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded">
+                    <a href="{{ route('listings.index') }}" class="p-1 px-6 text-center rounded-md
+                                      text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
+                                      duration-300 ease-in-out transition-all">
                         <i class="fa fa-xmark text-lg pr-2"></i>
                         <span class="">Cancel</span>
                     </a>
