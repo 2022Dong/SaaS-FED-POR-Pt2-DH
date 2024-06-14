@@ -15,34 +15,35 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // get the Super Admin and Admin roles for the Administrator, Staff and Client
+        // get the Super Admin and Admin roles for the Administrator, Lecturer and Student
         $roleSuperAdmin = Role::whereName('Super-Admin')->get();
         $roleAdmin = Role::whereName('Admin')->get();
         $roleStaff = Role::whereName('Staff')->get();
         $roleClient = Role::whereName('Client')->get();
+        $roleMember = Role::whereName('Member')->get();
+        $roleGuest = Role::whereName('Guest')->get();
 
         // Create Super Admin User and assign the role to him.
         $userAdmin = User::create([
             'id' => 111,
             'name' => 'Administrator',
-            'email' => 'super.admin@example.com',
+            'email' => 'admin@example.com',
             'password' => Hash::make('Password1')
         ]);
         $userAdmin->assignRole([$roleSuperAdmin]);
 
         // Create Admin
-        $userStudent = User::create([
-            'id' => 500,
+        $userAdmin = User::create([
+            'id' => 501,
             'name' => 'Admin1',
-            'email' => 'Admin1@example.com',
+            'email' => 'admin1@example.com',
             'password' => Hash::make('Password1')
         ]);
-        $userStudent->assignRole([$roleAdmin]);
-
+        $userAdmin->assignRole([$roleAdmin]);
 
         // Create Staff
         $userStaff = User::create([
-            'id' => 1000,
+            'id' => 600,
             'name' => 'Staff1',
             'email' => 'staff1@example.com',
             'password' => Hash::make('Password1')
@@ -50,26 +51,31 @@ class UserSeeder extends Seeder
         $userStaff->assignRole([$roleStaff]);
 
         // Create Client
-        $userClient = User::create([
-            'id' => 2000,
+        $useClient = User::create([
+            'id' => 700,
             'name' => 'Client1',
             'email' => 'client1@example.com',
             'password' => Hash::make('Password1')
         ]);
-        $userClient->assignRole([$roleClient]);
+        $useClient->assignRole([$roleClient]);
+
+        // Create Member
+        $userMember = User::create([
+            'id' => 502,
+            'name' => 'Member1',
+            'email' => 'member1@example.com',
+            'password' => Hash::make('Password1')
+        ]);
+        $userMember->assignRole([$roleMember]);
+
 
         // Create Guest (unverified user)
         $userGuest = User::create([
-            'id' => 3000,
+            'id' => 1000,
             'name' => 'Dee Mouser',
             'email' => 'dee.mouser@example.com',
             'password' => Hash::make('Password1')
         ]);
-
-
-        $roleGuest = Role::create(['name' => 'Guest']);
-        $roleGuest->givePermissionTo('listing-show');
-
         $userGuest->assignRole([$roleGuest]);
 
 
