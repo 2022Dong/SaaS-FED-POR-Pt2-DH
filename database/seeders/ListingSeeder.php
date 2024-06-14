@@ -18,7 +18,7 @@ class ListingSeeder extends Seeder
 
         $seedListings = [
             [
-                'user_id' => 1,
+                'user_id' => 111,
                 'title' => 'Data Scientist',
                 'description' => 'Exciting opportunity to join our team in leveraging data to drive insights and innovation.',
                 'salary' => '$90,000 - $110,000 AUD annually',
@@ -34,7 +34,7 @@ class ListingSeeder extends Seeder
                 'created_at' => Carbon::parse('2024-04-24 09:30:00'),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 111,
                 'title' => 'Mining Engineer',
                 'description' => 'Exciting opportunity to work in the mining industry in Western Australia, contributing to the extraction and processing of valuable resources.',
                 'salary' => '$100,000 - $120,000 AUD annually',
@@ -50,7 +50,7 @@ class ListingSeeder extends Seeder
                 'created_at' => Carbon::parse('2024-04-26 09:45:00'),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 111,
                 'title' => 'Civil Engineer',
                 'description' => 'Exciting opportunity to be part of major infrastructure projects in Western Australia.',
                 'salary' => '$80,000 - $100,000 AUD annually',
@@ -66,7 +66,7 @@ class ListingSeeder extends Seeder
                 'created_at' => Carbon::parse('2024-04-25 10:00:00'),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 111,
                 'title' => 'Data Scientist',
                 'description' => 'Exciting opportunity to join our team in leveraging data to drive insights and innovation.',
                 'salary' => '$90,000 - $110,000 AUD annually',
@@ -82,7 +82,7 @@ class ListingSeeder extends Seeder
                 'created_at' => Carbon::parse('2024-04-24 09:30:00'),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 111,
                 'title' => 'Software Developer',
                 'description' => 'Exciting opportunity to be part of a dynamic software development team and contribute to the creation of innovative solutions.',
                 'salary' => '$85,000 - $100,000 AUD annually',
@@ -98,7 +98,7 @@ class ListingSeeder extends Seeder
                 'created_at' => Carbon::parse('2024-05-01 10:30:00'),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 111,
                 'title' => 'Registered Nurse',
                 'description' => 'Rewarding opportunity to join our healthcare team and provide compassionate care to patients.',
                 'salary' => '$65,000 - $80,000 AUD annually',
@@ -114,7 +114,7 @@ class ListingSeeder extends Seeder
                 'created_at' => Carbon::parse('2024-04-30 09:45:00'),
             ],
             [
-                'user_id' => 1,
+                'user_id' => 111,
                 'title' => 'Senior Financial Analyst',
                 'description' => 'Exciting opportunity to join our finance team and drive financial analysis and reporting processes.',
                 'salary' => '$90,000 - $110,000 AUD annually',

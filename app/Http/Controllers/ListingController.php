@@ -16,7 +16,7 @@ class ListingController extends Controller
     public function index()
     {
         //$listings = Listing::all();
-        $listings = Listing::paginate(6);
+        $listings = Listing::orderBy('created_at', 'desc')->paginate(6);
         $trashedCount = Listing::onlyTrashed()->latest()->get()->count();
         return view('listings.index', compact(['listings', 'trashedCount',]));
         return view('listings.index', compact(['listings',]));
@@ -83,17 +83,19 @@ class ListingController extends Controller
             ],
             'benefits' => [
                 'required',
-            ],
+            ]
         ];
 
+        // Validate request data
         $validated = $request->validate($rules);
 
-        // Add the authenticated listing's ID to the validated data --chatgpt
-        $validated['listing_id'] = auth()->id();
+        // Add the authenticated user's ID to the validated data
+        $validated['user_id'] = auth()->id();
 
-        // Store
+        // Store the listing
         $listing = Listing::create($validated);
 
+        // Redirect to listings index with success message
         return redirect(route('listings.index'))
             ->withSuccess("Added '{$listing->title}'.");
     }
