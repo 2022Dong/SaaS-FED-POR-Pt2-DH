@@ -23,7 +23,7 @@ Route::get('/dashboard', [StaticPageController::class, 'admin'])
 
 // Members home page
 Route::group(
-    ['prefix' => 'members', 'middleware' => ['auth', 'verified', 'role:Member|Admin|Super-Admin']],
+    ['prefix' => 'members', 'middleware' => ['auth', 'verified', 'role:Staff|Admin|Super-Admin']],
     function () {
         Route::get('/home', [StaticPageController::class, 'index'])
             ->name('members.home');

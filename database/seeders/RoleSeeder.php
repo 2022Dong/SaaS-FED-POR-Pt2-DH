@@ -95,16 +95,9 @@ class RoleSeeder extends Seeder
         $roleClient->givePermissionTo('listing-delete');
         $roleClient->givePermissionTo('listing-trash-recover');
         $roleClient->givePermissionTo('listing-trash-remove');
+        $roleClient->givePermissionTo('listing-trash-empty');
+        $roleClient->givePermissionTo('listing-trash-restore');
         $roleClient->givePermissionTo('members');
-
-        // Generate the Member role
-        $roleUser = Role::create(['name' => 'Member']);
-        $roleUser->givePermissionTo('listing-browse');
-        $roleUser->givePermissionTo('listing-edit');
-        $roleUser->givePermissionTo('listing-show');
-        $roleUser->givePermissionTo('listing-add');
-        $roleUser->givePermissionTo('listing-delete');
-        $roleUser->givePermissionTo('members');
 
         // Create Guest (unverified user)
         $roleGuest = Role::create(['name' => 'Guest']);
