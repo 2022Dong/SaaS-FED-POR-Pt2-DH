@@ -19,7 +19,7 @@
                     Back To Listings
                 </a>
 
-                @can('update', $listing)
+                @can('listing-delete', $listing)
                 <div class="flex space-x-4 ml-4">
                     <!-- Delete Form -->
                     <form method="POST" action="{{ route('listings.destroy', $listing) }}">

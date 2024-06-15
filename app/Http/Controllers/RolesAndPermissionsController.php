@@ -15,6 +15,7 @@ use Spatie\Permission\Models\Role;
 
 class RolesAndPermissionsController extends Controller implements HasMiddleware
 {
+    // Returns a list of valid ‘roles’ that have access to the controller
     public static function middleware(): array
     {
         return [

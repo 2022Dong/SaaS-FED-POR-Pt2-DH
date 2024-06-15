@@ -35,11 +35,11 @@ class ListingPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can edit the model.
      */
-    public function update(User $user, Listing $listing)
+    public function edit(User $user, Listing $listing)
     {
-        return $user->hasRole('Administrator') || $user->hasRole('Staff') || $user->id === $listing->user_id;
+        return $user->hasRole(['Super-Admin', 'Admin', 'Staff']) || $user->id === $listing->user_id;
     }
 
     /**
@@ -47,7 +47,15 @@ class ListingPolicy
      */
     public function delete(User $user, Listing $listing)
     {
-        return $user->hasRole('Administrator') || $user->hasRole('Staff') || $user->id === $listing->user_id;
+        return $user->hasRole(['Super-Admin', 'Admin', 'Staff']) || $user->id === $listing->user_id;
+    }
+
+    /**
+     * Determine whether the user can view the deleted listings.
+     */
+    public function viewDeleted(User $user)
+    {
+        return $user->hasRole(['Super-Admin', 'Admin', 'Staff']);
     }
 
     /**
