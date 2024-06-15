@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Listing;
 
 class StaticPageController extends Controller
 {
     // Add Welcome Method to the Class
     public function welcome()
     {
-        return view('pages.welcome');
+        $latestListings = Listing::latest()->take(3)->get();
+        return view('pages.welcome', compact('latestListings'));
     }
 
     public function about()
