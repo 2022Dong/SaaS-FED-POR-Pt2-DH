@@ -75,6 +75,8 @@ class UserSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => Hash::make('Password1'),
+            'login_at' => now(),
+            'logout_at' => now()->addHours(8),
         ]);
     }
 }

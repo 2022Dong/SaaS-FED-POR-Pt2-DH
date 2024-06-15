@@ -29,11 +29,13 @@
                         {{ __('New User') }}
                     </a>
 
+                    @can('user-trash-recover')
                     <a href="{{ route('users.trash') }}" class="p-2 px-4 text-center rounded-md h-10                              
                               duration-300 ease-in-out transition-all space-x-2">
                         <i class="fa fa-trash font-xl"></i>
                         {{ $trashedCount }} {{ __('Deleted') }}
                     </a>
+                    @endcan
                 </section>
             </header>
 
@@ -47,6 +49,7 @@
                         <th class="pl-2 flex-0 text-left">Name</th>
                         <th class="text-left">Email</th>
                         <th class="text-left">Last Login</th>
+                        <th class="text-left">Status</th>
                         <th class="pr-2 text-right">Actions</th>
                     </tr>
                 </thead>
@@ -61,8 +64,8 @@
                         <td class="py-2 pl-2 flex-0 text-left">{{ $user->name }}</td>
                         <td class="py-2 text-left">{{ $user->email }}</td>
                         <td class="py-2 text-left">{{ $user->updated_at }}</td>
+                        <td class="py-2 text-left">{{ $user->roles->pluck('name')->implode(', ') }}</td>
                         <td class="py-2 pr-2 text-right">
-                            @if(!$user->hasRole('Super-Admin'))
                             <form class="flex flex-row gap-2 items-center justify-end" action="{{ route('users.destroy', $user) }}" method="POST">
                                 @csrf
                                 @method('delete')
@@ -85,14 +88,6 @@
                                     <i class="fa fa-trash text-lg"></i>
                                     <span class="sr-only">Delete</span>
                                 </a>
-                                @else
-                                <a href="{{ route('users.show', $user) }}" class="p-1 w-10 text-center rounded-md
-                                          text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
-                                          duration-300 ease-in-out transition-all">
-                                    <i class="fa fa-eye text-lg"></i>
-                                    <span class="sr-only hidden">View</span>
-                                </a>
-                                @endif
                             </form>
                         </td>
                     </tr>
@@ -100,7 +95,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="4" class="py-1 px-2 bg-gray-200 dark:bg-gray-700
+                        <td colspan="5" class="py-1 px-2 bg-gray-200 dark:bg-gray-700
                                 border border-transparent border-t-gray-500">
                             @if($users->hasPages())
                             {{ $users->links() }}

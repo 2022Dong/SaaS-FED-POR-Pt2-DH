@@ -35,7 +35,7 @@
 
             <div class="grid grid-cols-12">
                 <p class="col-span-12 md:col-span-2 xl:col-span-1 text-gray-500">Last Login</p>
-                <p class="col-span-12 md:col-span-10 xl:col-span-11  ">{{ $user->login_at ?? "---" }}</p>
+                <p class="col-span-12 md:col-span-10 xl:col-span-11  ">{{ $user->login_at }}</p>
             </div>
 
             <div class="grid grid-cols-12">

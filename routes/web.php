@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class); // This adds the following users CRUD routes automatically.
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])->name('listing.delete');
     // Trashed (Soft Deleted) users
     Route::get('listings/trash', [ListingController::class, 'trash'])->name('listings.trash'); // Showing all users in the trash
@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
 // role-assignment screen
 Route::group([
     'prefix' => 'admin',
-    'middleware' => ['auth', 'verified', 'role:Admin|Super-Admin']
+    'middleware' => ['auth', 'verified', 'role:Staff|Admin|Super-Admin']
 ], function () {
 
     Route::get('/permissions', [RolesAndPermissionsController::class, 'index'])
