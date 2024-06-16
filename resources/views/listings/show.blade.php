@@ -19,7 +19,7 @@
                     Back To Listings
                 </a>
 
-                @can('product-edit', $listing)
+                @can('listing-edit', $listing)
                 <div class="flex space-x-4 ml-4">
                     <a href="{{ route('listings.edit', $listing) }}" class="p-1 px-6 text-center rounded-md
                                       text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500

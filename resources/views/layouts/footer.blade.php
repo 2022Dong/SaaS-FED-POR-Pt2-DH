@@ -1,4 +1,5 @@
 <footer class="w-full bg-gray-800 text-gray-500 p-8">
+    @can('listing-add')
     <div class="container mx-auto my-6 bg-blue-800 text-white rounded p-4 flex items-center justify-between">
         <div>
             <h2 class="text-xl font-semibold">Looking to hire?</h2>
@@ -6,13 +7,18 @@
                 Post your job listing now and find the perfect candidate.
             </p>
         </div>
-        <a href="post-job.html" class="ml-6 px-4 rounded-md py-2
-                  text-black bg-yellow-400 shadow shadow-md shadow-black/70
-                  hover:text-yellow-300 hover:bg-yellow-600 hover:shadow-none
-                  transition duration-300 h-10">
-            <i class="fa fa-edit"></i> Post a Job
-        </a>
+        @can('listing-add')
+        <div class="flex">
+            <x-responsive-nav-link :href="route('listings.create')" :active="request()->routeIs('listings.*')" class="ml-6 px-4 rounded-md py-2
+                      text-black bg-yellow-400 shadow shadow-black/70
+                      hover:text-yellow-300 hover:bg-yellow-600 hover:shadow-none
+                      transition duration-300 h-10">
+                <i class="fa fa-edit mr-2"></i> {{ __('Post a Job') }}
+            </x-responsive-nav-link>
+        </div>
+        @endcan
     </div>
+    @endcan
 
     <div class="container p-4 mx-auto flex flex-col xl:flex-row items-start xl:items-center
                 justify-start xl:justify-between text-sm gap-2 sm:gap-0.5">

@@ -15,12 +15,16 @@
                 <x-nav-link :href="route('pricing')" :active="request()->routeIs('/')" class="group">
                     {{ __('Pricing') }}
                 </x-nav-link>
-
+                @can('user-browse')
                 <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" class="group">
                     {{ __('Users') }}
-                </x-nav-link><x-nav-link :href="route('admin.permissions')" :active="request()->routeIs('admin.*')" class="group">
+                </x-nav-link>
+                @endcan
+                @can('role-assign')
+                <x-nav-link :href="route('admin.permissions')" :active="request()->routeIs('admin.*')" class="group">
                     {{ __('Roles') }}
                 </x-nav-link>
+                @endcan
                 <x-nav-link :href="route('about')" :active="request()->routeIs('/')" class="group">
                     {{ __('About') }}
                 </x-nav-link>
@@ -101,14 +105,18 @@
                 <i class="fa fa-tag mr-2 text-lg group-hover:text-yellow-400"></i>
                 {{ __('Pricing') }}
             </x-responsive-nav-link>
+            @can('user-browse')
             <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" class="focus:border-yellow-500">
                 <i class="fa fa-users mr-2 text-lg group-hover:text-yellow-400"></i>
                 {{ __('Users') }}
             </x-responsive-nav-link>
+            @endcan
+            @can('role-assign')
             <x-responsive-nav-link :href="route('admin.permissions')" :active="request()->routeIs('users.*')" class="focus:border-yellow-500">
                 <i class="fa fa-users mr-2 text-lg group-hover:text-yellow-400"></i>
                 {{ __('Roles') }}
             </x-responsive-nav-link>
+            @endcan
             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('/')">
                 <i class="fa fa-qrcode mr-2 text-lg group-hover:text-yellow-400"></i>
                 {{ __('About') }}
@@ -118,11 +126,12 @@
                 {{ __('Contact Us') }}
             </x-responsive-nav-link>
         </div>
-
+        @can('listing-add')
         <x-responsive-nav-link :href="route('listings.create')" :active="request()->routeIs('listings.*')" class="bg-yellow-500 focus:border-yellow-500 rounded-md
                                       my-1">
             <i class="fa fa-edit mr-2"></i> {{ __('Post a Job') }}
         </x-responsive-nav-link>
+        @endcan
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600 bg-indigo-100 mt-3">

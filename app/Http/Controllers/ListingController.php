@@ -7,6 +7,7 @@ use App\Http\Requests\StoreListingRequest;
 use App\Http\Requests\UpdateListingRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Gate;
 
 class ListingController extends Controller
 {
@@ -19,7 +20,6 @@ class ListingController extends Controller
         $listings = Listing::orderBy('created_at', 'desc')->paginate(6);
         $trashedCount = Listing::onlyTrashed()->latest()->get()->count();
         return view('listings.index', compact(['listings', 'trashedCount',]));
-        return view('listings.index', compact(['listings',]));
     }
 
     /**
@@ -113,6 +113,7 @@ class ListingController extends Controller
      */
     public function edit(Listing $listing)
     {
+        //Gate::authorize('update', $listing);
         return view('listings.edit', compact(['listing']));
     }
 
@@ -121,6 +122,7 @@ class ListingController extends Controller
      */
     public function update(UpdateListingRequest $request, Listing $listing)
     {
+        //Gate::authorize('update', $listing);
         // Validate
         $rules = [
             'title' => [
@@ -190,6 +192,7 @@ class ListingController extends Controller
      */
     public function delete(Listing $listing)
     {
+        //Gate::authorize('delete', $listing);
         return view('listings.delete', compact(['listing']));
     }
 

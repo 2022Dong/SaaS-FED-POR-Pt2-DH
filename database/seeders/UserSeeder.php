@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
         $roleAdmin = Role::whereName('Admin')->get();
         $roleStaff = Role::whereName('Staff')->get();
         $roleClient = Role::whereName('Client')->get();
-        $roleMember = Role::whereName('Member')->get();
+        //$roleMember = Role::whereName('Member')->get();
         $roleGuest = Role::whereName('Guest')->get();
 
         // Create Super Admin User and assign the role to him.
@@ -59,16 +59,6 @@ class UserSeeder extends Seeder
         ]);
         $useClient->assignRole([$roleClient]);
 
-        // Create Member
-        $userMember = User::create([
-            'id' => 502,
-            'name' => 'Member1',
-            'email' => 'member1@example.com',
-            'password' => Hash::make('Password1')
-        ]);
-        $userMember->assignRole([$roleMember]);
-
-
         // Create Guest (unverified user)
         $userGuest = User::create([
             'id' => 1000,
@@ -85,6 +75,8 @@ class UserSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => Hash::make('Password1'),
+            'login_at' => now(),
+            'logout_at' => now()->addHours(8),
         ]);
     }
 }
