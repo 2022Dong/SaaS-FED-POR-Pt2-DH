@@ -8,9 +8,22 @@ use App\Http\Requests\UpdateListingRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class ListingController extends Controller
 {
+    /**
+     * Define permissions for the Product Controller
+     */
+    // public function __construct()
+    // {
+    //     $this->middleware('permission:listing-list|listing-add|listing-edit|listing-delete', ['only' => ['index', 'show']]);
+    //     $this->middleware('permission:listing-add', ['only' => ['create', 'store']]);
+    //     $this->middleware('permission:listing-edit', ['only' => ['edit', 'update']]);
+    //     $this->middleware('permission:listing-delete', ['only' => ['destroy']]);
+    // }
+
     /**
      * Display a listing of the resource.
      */
@@ -243,7 +256,7 @@ class ListingController extends Controller
         $trashCount = $listings->count();
 
         foreach ($listings as $listing) {
-            $listing->restore(); // This restores the soft-deleted listing
+            $listing->restore();
         }
         return redirect(route('listings.index'))
             ->withSuccess("Successfully recovered {$trashCount} listings.");
@@ -275,7 +288,7 @@ class ListingController extends Controller
         $listings = Listing::onlyTrashed()->get();
         $trashCount = $listings->count();
         foreach ($listings as $listing) {
-            $listing->forceDelete(); // This restores the soft-deleted listing
+            $listing->forceDelete();
         }
         return redirect(route('listings.trash'))
             ->withSuccess("Successfully emptied trash of {$trashCount} listings.");
