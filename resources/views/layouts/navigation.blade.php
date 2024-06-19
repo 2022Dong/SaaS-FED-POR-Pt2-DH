@@ -61,6 +61,9 @@
                     <x-dropdown-link :href="route('profile.edit')" class="group">
                         {{ __('Profile') }}
                     </x-dropdown-link>
+                    <x-dropdown-link :href="route('listings.trash')" class="group">
+                        {{ __('Deleted Listings') }}
+                    </x-dropdown-link>
 
                     <!-- Authentication (Logout) -->
                     <form method="POST" action="{{ route('logout') }}">
