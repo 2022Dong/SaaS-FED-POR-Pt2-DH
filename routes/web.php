@@ -59,11 +59,12 @@ Route::get('listings/{listing}/show', [ListingController::class, 'show'])->name(
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])->name('listing.delete');
     // Trashed (Soft Deleted) users
-    Route::get('listings/trash', [ListingController::class, 'trash'])->name('listings.trash'); // Showing all users in the trash
-    Route::post('listings/trash/recover', [ListingController::class, 'recover'])->name('listings.trash-recover'); // Recover All users
-    Route::get('listings/trash/{id}/restore', [ListingController::class, 'restore'])->name('listings.trash-restore'); // Recover a user from trash
-    Route::delete('listings/trash/empty', [ListingController::class, 'empty'])->name('listings.trash-empty'); // Emptying the trash
-    Route::delete('listings/trash{id}/remove', [ListingController::class, 'remove'])->name('listings.trash-remove'); // Removing a SINGLE user from trash
+    Route::get('listings/trash', [ListingController::class, 'trash'])->name('listings.trash');
+    //Route::get('/listings/client-trash', [ListingController::class, 'clientTrash'])->name('listings.client.trash');
+    Route::post('listings/trash/recover', [ListingController::class, 'recover'])->name('listings.trash-recover');
+    Route::get('listings/trash/{id}/restore', [ListingController::class, 'restore'])->name('listings.trash-restore');
+    Route::delete('listings/trash/empty', [ListingController::class, 'empty'])->name('listings.trash-empty');
+    Route::delete('listings/trash{id}/remove', [ListingController::class, 'remove'])->name('listings.trash-remove');
 
     Route::resource('listings', ListingController::class)->except(['index', 'show']); // This adds the following listings CRUD routes automatically, but except the 2 routes.
 });
