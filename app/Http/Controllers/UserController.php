@@ -58,6 +58,9 @@ class UserController extends Controller
             ]
         );
 
+        // Assign the "Client" role
+        $user->assignRole('Client');   // TODO...
+
         return redirect(route('users.index'))
             ->withSuccess("Added '{$user->name}'.");
     }

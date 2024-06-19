@@ -55,7 +55,10 @@
                         <i class="fa fa-arrow-left text-lg"></i>
                         <span>Back</span>
                     </a>
-
+                    <!-- Edit and Delete buttons conditional -->
+                    @if (!$user->roles->pluck('name')->contains('Super-Admin')
+                    && !$user->roles->pluck('name')->contains('Admin')
+                    && !($user->roles->pluck('name')->contains('Staff') && auth()->user()->id != $user->id))
                     <a href="{{ route('users.edit', $user) }}" class="p-1 px-6 text-center rounded-md
                                       text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
                                       duration-300 ease-in-out transition-all">
@@ -69,7 +72,7 @@
                         <i class="fa fa-trash text-lg"></i>
                         <span>Delete</span>
                     </button>
-
+                    @endif
                 </form>
             </div>
 
