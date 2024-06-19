@@ -66,7 +66,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('listings/trash/empty', [ListingController::class, 'empty'])->name('listings.trash-empty');
     Route::delete('listings/trash{id}/remove', [ListingController::class, 'remove'])->name('listings.trash-remove');
 
+    Route::get('listings/admin-index', [ListingController::class, 'adminIndex'])->name('listings.admin-index'); // admin access
+
     Route::resource('listings', ListingController::class)->except(['index', 'show']); // This adds the following listings CRUD routes automatically, but except the 2 routes.
+
 });
 
 // role-assignment screen

@@ -35,6 +35,13 @@ class ListingController extends Controller
         return view('listings.index', compact(['listings', 'trashedCount',]));
     }
 
+    public function adminIndex(): View
+    {
+        $listings = Listing::orderBy('created_at', 'desc')->paginate(6);
+        $trashedCount = Listing::onlyTrashed()->latest()->get()->count();
+        return view('listings.admin-index', compact(['listings', 'trashedCount',]));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -233,7 +240,7 @@ class ListingController extends Controller
         $clientListings = Listing::onlyTrashed()->where('user_id', $user->id)->latest()->get();
 
         if ($user->roles->pluck('name')->contains('Client'))
-            return view('listings.client_trash', compact(['clientListings']));
+            return view('listings.client-trash', compact(['clientListings']));
         else
             return view('listings.trash', compact(['listings']));
     }

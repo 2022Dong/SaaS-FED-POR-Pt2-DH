@@ -8,9 +8,11 @@
                 <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
                     {{ __('Dashboard') }}
                 </x-nav-link>
-
                 <x-nav-link :href="route('listings.index')" :active="request()->routeIs('listings.*')" class="group">
                     {{ __('Listings') }}
+                </x-nav-link>
+                <x-nav-link :href="route('listings.admin-index')" :active="request()->routeIs('listings.admin-index')" class="group">
+                    {{ __('Manage Listings') }}
                 </x-nav-link>
                 <x-nav-link :href="route('pricing')" :active="request()->routeIs('/')" class="group">
                     {{ __('Pricing') }}
@@ -61,10 +63,6 @@
                     <x-dropdown-link :href="route('profile.edit')" class="group">
                         {{ __('Profile') }}
                     </x-dropdown-link>
-                    <x-dropdown-link :href="route('listings.trash')" class="group">
-                        {{ __('Deleted Listings') }}
-                    </x-dropdown-link>
-
                     <!-- Authentication (Logout) -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
