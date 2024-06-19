@@ -226,9 +226,27 @@ class ListingController extends Controller
      */
     public function trash(): View
     {
+        // all trash
         $listings = Listing::onlyTrashed()->latest()->get();
-        return view('listings.trash', compact(['listings']));
+        // client trash
+        $user = auth()->user();
+        $clientListings = Listing::onlyTrashed()->where('user_id', $user->id)->latest()->get();
+
+        if ($user->roles->pluck('name')->contains('Client'))
+            return view('listings.client_trash', compact(['clientListings']));
+        else
+            return view('listings.trash', compact(['listings']));
     }
+
+    // /**
+    //  * Return view showing only client's own deleted listings.
+    //  */
+    // public function clientTrash(): View
+    // {
+    //     $user = auth()->user();
+    //     $listings = Listing::onlyTrashed()->where('user_id', $user->id)->latest()->get();
+    //     return view('listings.client_trash', compact(['listings']));
+    // }
 
     /**
      * Recover a listing from trash
