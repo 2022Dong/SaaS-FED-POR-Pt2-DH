@@ -47,7 +47,14 @@ class ListingController extends Controller
      */
     public function create()
     {
-        return view('listings.create');
+        if (
+            auth()->user()->roles->pluck('name')->contains('Client')
+            || auth()->user()->roles->pluck('name')->contains('Super-Admin')
+        ) {
+            return view('listings.create');
+        } else {
+            return response("Sorry, only clients or super-admins can add listings.", 403);
+        }
     }
 
     /**
