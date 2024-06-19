@@ -77,9 +77,11 @@
                                 </a>
 
                                 <!-- Edit and Delete buttons conditional -->
-                                @if (!$user->roles->pluck('name')->contains('Super-Admin')
-                                && !$user->roles->pluck('name')->contains('Admin')
-                                && auth()->user()->id != $user->id)
+                                @if (
+                                (auth()->user()->hasRole('Super-Admin')) ||
+                                (auth()->user()->hasRole('Admin') && ($user->hasRole('Staff') || $user->hasRole('Client') || $user->hasRole('Guest') || $user->roles->isEmpty())) ||
+                                (auth()->user()->hasRole('Staff') && ($user->hasRole('Client') || $user->hasRole('Guest') || $user->roles->isEmpty()))
+                                )
                                 <a href="{{ route('users.edit', $user) }}" class="p-1 w-10 text-center rounded-md
                                         text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
                                         duration-300 ease-in-out transition-all">
