@@ -102,6 +102,10 @@
                 <i class="fa fa-list mr-2 text-lg group-hover:text-yellow-400"></i>
                 {{ __('Listings') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('listings.admin-index')" :active="request()->routeIs('listings.admin-index')" class="focus:border-yellow-500">
+                <i class="fa fa-list mr-2 text-lg group-hover:text-yellow-400"></i>
+                {{ __('Manage Listings') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('pricing')" :active="request()->routeIs('/')">
                 <i class="fa fa-tag mr-2 text-lg group-hover:text-yellow-400"></i>
                 {{ __('Pricing') }}

@@ -34,20 +34,33 @@
         </section>
 
         <section id="footerNav" class="flex flex-col sm:flex-row gap-1 -ml-1">
-            <x-nav-link :href="route('welcome')" class="border-none text-gray-500 hover:text-gray-300 -my-1">
-                {{ __('Welcome') }}
-            </x-nav-link>
-            <x-nav-link :href="route('welcome')" class="border-none text-gray-500 hover:text-gray-300 -my-1">
+            <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
                 {{ __('Dashboard') }}
             </x-nav-link>
-            <x-nav-link :href="route('welcome')" class="border-none text-gray-500 hover:text-gray-300 -my-1">
-                {{ __('Contact Us') }}
+            <x-nav-link :href="route('listings.index')" :active="request()->routeIs('listings.*')" class="group">
+                {{ __('Listings') }}
             </x-nav-link>
-            <x-nav-link :href="route('welcome')" class="border-none text-gray-500 hover:text-gray-300 -my-1">
+            <x-nav-link :href="route('listings.admin-index')" :active="request()->routeIs('listings.admin-index')" class="group">
+                {{ __('Manage Listings') }}
+            </x-nav-link>
+            <x-nav-link :href="route('pricing')" :active="request()->routeIs('/')" class="group">
+                {{ __('Pricing') }}
+            </x-nav-link>
+            @can('user-browse')
+            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')" class="group">
+                {{ __('Users') }}
+            </x-nav-link>
+            @endcan
+            @can('role-assign')
+            <x-nav-link :href="route('admin.permissions')" :active="request()->routeIs('admin.*')" class="group">
+                {{ __('Roles') }}
+            </x-nav-link>
+            @endcan
+            <x-nav-link :href="route('about')" :active="request()->routeIs('/')" class="group">
                 {{ __('About') }}
             </x-nav-link>
-            <x-nav-link :href="route('welcome')" class="border-none text-gray-500 hover:text-gray-300 -my-1">
-                {{ __('Pricing') }}
+            <x-nav-link :href="route('contact')" :active="request()->routeIs('/')" class="group">
+                {{ __('Contact Us') }}
             </x-nav-link>
         </section>
     </div>

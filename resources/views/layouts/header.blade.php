@@ -28,6 +28,9 @@
                 <i class="fa fa-edit mr-2"></i> {{ __('Post a Job') }}
             </x-responsive-nav-link>
         </div>
+        @else
+        <!-- Empty, remove the button -->
+        <div class="flex ml-6"></div>
         @endcan
     </section>
 </header>
