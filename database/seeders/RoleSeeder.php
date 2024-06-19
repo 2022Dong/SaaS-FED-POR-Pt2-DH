@@ -75,7 +75,6 @@ class RoleSeeder extends Seeder
         $roleStaff = Role::create(['name' => 'Staff']);
         $roleStaff->givePermissionTo('user-browse');
         $roleStaff->givePermissionTo('user-show');
-        $roleStaff->givePermissionTo('user-edit');
         $roleStaff->givePermissionTo('user-add');
         $roleStaff->givePermissionTo('user-delete');
         $roleStaff->givePermissionTo('listing-browse');

@@ -19,7 +19,7 @@
                     Back To Listings
                 </a>
 
-                @can('listing-edit', $listing)
+                @if(auth()->user()->hasAnyRole(['Staff', 'Super-Admin', 'Admin']) || auth()->user()->hasRole('Client') && auth()->user()->id == $listing->user_id)
                 <div class="flex space-x-4 ml-4">
                     <a href="{{ route('listings.edit', $listing) }}" class="p-1 px-6 text-center rounded-md
                                       text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
@@ -37,7 +37,7 @@
                         {{ __('Deleted') }}
                     </a>
                 </div>
-                @endcan
+                @endif
 
             </div>
             <div class="p-4">

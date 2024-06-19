@@ -11,7 +11,7 @@
         @if(Session::has('success'))
         <section id="Messages" class="my-4 px-4">
             <div class="p-4 border-green-500 bg-green-100 text-green-700 rounded-lg">
-                {{Session::get('success')}}
+                {{ Session::get('success') }}
             </div>
         </section>
         @endif
@@ -44,12 +44,11 @@
                           border border-gray-600 dark:border-gray-700 w-full">
 
                 <thead class="py-1 px-2 bg-gray-700 text-gray-200 ">
-
                     <tr class="bg-gray-400 text-gray-800 py-2 rounded-lg ">
                         <th class="pl-2 flex-0 text-left">Name</th>
                         <th class="text-left">Email</th>
                         <th class="text-left">Last Login</th>
-                        <th class="text-left">Status</th>
+                        <th class="text-left">Role</th>
                         <th class="pr-2 text-right">Actions</th>
                     </tr>
                 </thead>
@@ -60,7 +59,6 @@
                                hover:bg-gray-200 dark:hover:bg-gray-900 ease-in-out duration-300 transition-all
                                border border-gray-200 dark:border-gray-700
                                dark:text-gray-400">
-
                         <td class="py-2 pl-2 flex-0 text-left">{{ $user->name }}</td>
                         <td class="py-2 text-left">{{ $user->email }}</td>
                         <td class="py-2 text-left">{{ $user->updated_at }}</td>
@@ -69,25 +67,33 @@
                             <form class="flex flex-row gap-2 items-center justify-end" action="{{ route('users.destroy', $user) }}" method="POST">
                                 @csrf
                                 @method('delete')
+
+                                <!-- View Button, always visible -->
                                 <a href="{{ route('users.show', $user) }}" class="p-1 w-10 text-center rounded-md
-                                          text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
-                                          duration-300 ease-in-out transition-all">
+                                    text-blue-600 hover:text-blue-200 dark:hover:text-black bg-blue-200 dark:bg-black hover:bg-blue-500
+                                    duration-300 ease-in-out transition-all">
                                     <i class="fa fa-eye text-lg"></i>
                                     <span class="sr-only hidden">View</span>
                                 </a>
+
+                                <!-- Edit and Delete buttons conditional -->
+                                @if (!$user->roles->pluck('name')->contains('Super-Admin')
+                                && !$user->roles->pluck('name')->contains('Admin')
+                                && auth()->user()->id != $user->id)
                                 <a href="{{ route('users.edit', $user) }}" class="p-1 w-10 text-center rounded-md
-                                          text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
-                                          duration-300 ease-in-out transition-all">
+                                        text-purple-600 hover:text-purple-200 dark:hover:text-black bg-purple-200 dark:bg-black hover:bg-purple-500
+                                        duration-300 ease-in-out transition-all">
                                     <i class="fa fa-pen text-lg"></i>
                                     <span class="sr-only">Edit</span>
                                 </a>
 
                                 <a href="{{ route('user.delete', $user) }}" class="p-1 w-10 text-center rounded-md
-                                               text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
-                                               duration-300 ease-in-out transition-all">
+                                        text-red-600 hover:text-red-200 dark:hover:text-black bg-red-200 dark:bg-black hover:bg-red-500
+                                        duration-300 ease-in-out transition-all">
                                     <i class="fa fa-trash text-lg"></i>
                                     <span class="sr-only">Delete</span>
                                 </a>
+                                @endif
                             </form>
                         </td>
                     </tr>
@@ -106,7 +112,6 @@
                     </tr>
                 </tfoot>
             </table>
-
         </section>
     </article>
 </x-app-layout>

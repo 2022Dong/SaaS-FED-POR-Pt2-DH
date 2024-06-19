@@ -54,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('users', UserController::class); // This adds the following users CRUD routes automatically.
 });
 
+Route::get('listings', [ListingController::class, 'index'])->name('listings.index'); // public can access
+Route::get('listings/{listing}/show', [ListingController::class, 'show'])->name('listings.show');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])->name('listing.delete');
     // Trashed (Soft Deleted) users
@@ -63,9 +65,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('listings/trash/empty', [ListingController::class, 'empty'])->name('listings.trash-empty'); // Emptying the trash
     Route::delete('listings/trash{id}/remove', [ListingController::class, 'remove'])->name('listings.trash-remove'); // Removing a SINGLE user from trash
 
-    Route::resource('listings', ListingController::class); // This adds the following listings CRUD routes automatically.
+    Route::resource('listings', ListingController::class)->except(['index', 'show']); // This adds the following listings CRUD routes automatically, but except the 2 routes.
 });
-
 
 // role-assignment screen
 Route::group([

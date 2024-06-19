@@ -10,6 +10,8 @@ use Illuminate\View\View;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -30,7 +32,8 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('users.create');
+        $roles = Role::pluck('name', 'name')->all();
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -55,6 +58,9 @@ class UserController extends Controller
             ]
         );
 
+        // Assign the "Client" role
+        $user->assignRole('Client');   // TODO...
+
         return redirect(route('users.index'))
             ->withSuccess("Added '{$user->name}'.");
     }
@@ -62,17 +68,27 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user): View
+    public function show(string $id): View
     {
+        $user = User::find($id);
         return view('users.show', compact(['user',]));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user): View
+    public function edit(string $id): View
     {
-        return view('users.edit', compact(['user']));
+        $user = User::find($id);
+        /*
+         * Pluck is used to get just the "name" field from the Roles
+         * This then is used to show the possible roles on the admin page
+         * and allow the allocation of the role to the user.
+         */
+        $roles = Role::pluck('name', 'name')->all();
+        $userRole = $user->roles->pluck('name', 'name')->all();
+
+        return view('users.edit', compact('user', 'roles', 'userRole'));
     }
 
     /**
