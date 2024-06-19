@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('listings', [ListingController::class, 'index'])->name('listings.index'); // public can access
-Route::get('listings/{listing}/show', [ListingController::class, 'show'])->name('listings.show');
+//Route::get('listings/{listing}/show', [ListingController::class, 'show'])->name('listings.show');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('listings/{listing}/delete', [ListingController::class, 'delete'])->name('listing.delete');
     // Trashed (Soft Deleted) users
@@ -68,7 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('listings/admin-index', [ListingController::class, 'adminIndex'])->name('listings.admin-index'); // admin access
 
-    Route::resource('listings', ListingController::class)->except(['index', 'show']); // This adds the following listings CRUD routes automatically, but except the 2 routes.
+    Route::resource('listings', ListingController::class)->except(['index',]); // This adds the following listings CRUD routes automatically.
 
 });
 

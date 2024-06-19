@@ -38,9 +38,15 @@
                                 </li>
                             <?php endif; ?>
                         </ul>
+                        @if(auth()->user())
                         <a href="{{ route('listings.show', $listing) }}" class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
                             Details
                         </a>
+                        @else
+                        <a href="{{ route('login') }}" class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
+                            Details
+                        </a>
+                        @endif
                     </div>
                 </div>
                 @endforeach
