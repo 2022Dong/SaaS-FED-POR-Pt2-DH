@@ -1,33 +1,18 @@
 # Workopia in Laravel 11
 <a name="readme-top"></a>
 
-(START)
-
-TO DO: Make sure the Repository is PRIVATE
-
-TO DO: Add Your lecturer as a contributor to the project repository, so
-they are able to see your code, the commit history and other details 
-within the repository.
-
-TO DO: Add a one sentence overview/summary of this project.
-
-Once complete, remove from `(START)` to `(END)`
-
-(END)
-
+A demonstration web-based back-end administration interface and a basic public-facing front end for a small application.
 
 #### Built With
-
 [![PHP][Php.com]][Php-url]
 [![Laravel][Laravel.com]][Laravel-url]
 [![Tailwindcss][Tailwindcss.com]][Tailwindcss-url]
 [![Livewire][Livewire.com]][Livewire-url]
 [![Inertia][Inertia.com]][Inertia-url]
-
-TO DO: Add the IDE, Development stack/Platform, and other items used in 
-developing your solution. You will need to add the link definitions at the 
-end of the file for links similar to the above to work.
-Eg: `[![Laragon][Laragon.org][Laragon-url]`
+[![VS Code][VSCode.com]][VSCode-url]
+[![Nginx][Nginx.com]][Nginx-url]
+[![Blade][Blade.com]][Blade-url]
+[![SQLite][SQLite.com]][SQLite-url]
 
 ## Definitions
 
@@ -35,9 +20,10 @@ Eg: `[![Laragon][Laragon.org][Laragon-url]`
 |----|-------------------------------------------------------------------------------------------------------------|
 | BREAD | Database operations to Browse, Read, Edit, Add and Delete data                                               |
 | CRUD | More commonly used term over BREAD. Create (Add), Retrieve (Browse/Read), Update (Edit) and Delete (Delete) |
-
-TO DO: Add any extra definitions used in the document. For example, they 
-could include `MVC`, `HTTP VERB` and more.
+| MVC | More commonly used term over BREAD. Create (Add), Retrieve (Browse/Read), Update (Edit) and Delete (Delete) |
+| HTTP VERB | A method of indicating the desired action to be performed on a resource. Including GET (retrieve), POST (create), PUT (update), DELETE (remove), and PATCH (partial update). |
+| VERSION CONTROL | A system that records changes to a file or set of files over time so that you can recall specific versions later. eg. Git |
+| CLI | Command Line Interface. A text-based interface used to interact with software and operating systems by typing commands. |
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -45,16 +31,26 @@ could include `MVC`, `HTTP VERB` and more.
 
 ## Description
 
-TO DO: Provide a short description explaining the what, why, and how of your 
-project. 
+Provide a short description explaining the what, why, and how of your project.
 
 Use the following questions as a guide:
 
 - What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a
-  homework assignment.")
+  - To achieve certification, secure a job, and improve my coding skills.
+
+- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
+  - To learn the PHP Laravel framework and enhance my web development skills.
+
 - What problem does it solve?
+  - It provides a web-based back-end administration interface and a basic public-facing front end, solving data management and user interaction issues.
+
 - What did you learn?
+  - Setting up and configuring a Laravel project
+  - Implementing MVC architecture
+  - Creating user-friendly interfaces with Blade
+  - Managing databases with Eloquent ORM
+  - Applying version control with Git
+  - Working in vscode and CLI environments
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -192,9 +188,9 @@ Go the extra mile and write tests for your application. Then provide examples on
 
 ## Contact
 
-Your Name - @twitter_handle - email@email_client.com
+Name: Dongyun Huang  Email:20127545@tafe.wa.edu.au
 
-Project Link: https://github.com/github_username/repo_name
+Project Link: https://github.com/2022Dong/SaaS-FED-POR-Pt2-DH
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -258,3 +254,19 @@ rendered page on GitHub.
 [Php.com]: https://img.shields.io/badge/Php-777BB4?style=for-the-badge&logo=php&logoColor=white
 
 [Php-url]: https://inertiajs.com
+
+[VSCode.com]: https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white
+
+[VSCode-url]: https://code.visualstudio.com/
+
+[Nginx.com]: https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white
+
+[Nginx-url]: https://www.nginx.com/
+
+[Blade.com]: https://img.shields.io/badge/Blade-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+
+[Blade-url]: https://laravel.com/docs/8.x/blade
+
+[SQLite.com]: https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white
+
+[SQLite-url]: https://www.sqlite.org/
