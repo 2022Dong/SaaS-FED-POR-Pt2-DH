@@ -111,7 +111,7 @@ class ListingSeeder extends Seeder
                 'email' => 'jobs@compassionatecarehospital.com.au',
                 'requirements' => 'Bachelor\'s degree in Nursing; Current registration as a Registered Nurse with AHPRA; Experience in acute care preferred; Strong clinical assessment and decision-making skills; Compassionate and patient-centered approach',
                 'benefits' => 'Competitive salary; Shift allowances; Professional development opportunities; Supportive work environment; Employee assistance program',
-                'created_at' => Carbon::parse('2024-04-30 09:45:00'),
+                'created_at' => Carbon::now()->subHours(random_int(1,24*7*6)),
             ],
             [
                 'user_id' => 111,
@@ -127,7 +127,7 @@ class ListingSeeder extends Seeder
                 'email' => 'careers@capitalinsightgroup.com.au',
                 'requirements' => 'Bachelor\'s degree in Finance, Accounting, or related field; 5+ years of experience in financial analysis; Advanced Excel skills; Strong analytical and problem-solving abilities; Excellent communication and presentation skills',
                 'benefits' => 'Competitive salary; Performance-based bonuses; Opportunities for career advancement; Health and wellness benefits; Flexible work arrangements',
-                'created_at' => Carbon::parse('2024-04-29 10:00:00'),
+                'created_at' => Carbon::now()->subHours(random_int(1,24*7*6)),
             ],
         ];
 

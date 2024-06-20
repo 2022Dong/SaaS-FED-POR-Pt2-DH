@@ -11,7 +11,7 @@ class StoreListingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return true; // todo: Check to see if logged in, and they have the correct role/permission
     }
 
     /**
@@ -22,7 +22,54 @@ class StoreListingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'title' => [
+                'string',
+                'required',
+                'min:5',
+                'max:200'
+            ],
+            'description' => [
+                'required',
+            ],
+            'salary' => [
+                'string',
+                'required',
+            ],
+            'tags' => [
+                'string',
+                'required',
+            ],
+            'company' => [
+                'string',
+                'required',
+            ],
+            'address' => [
+                'string',
+                'required',
+            ],
+            'city' => [
+                'string',
+                'required',
+            ],
+            'state' => [
+                'string',
+                'required',
+            ],
+            'phone' => [
+                'string',
+                'required',
+            ],
+            'email' => [
+                'string',
+                'required',
+            ],
+            'requirements' => [
+                'required',
+            ],
+            'benefits' => [
+                'required',
+            ]
         ];
     }
 }

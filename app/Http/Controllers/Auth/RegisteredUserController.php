@@ -43,6 +43,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        // TODO: update user to guest role here
+
         Auth::login($user);
 
         return redirect(route('dashboard', absolute: false));

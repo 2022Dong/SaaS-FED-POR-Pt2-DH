@@ -22,14 +22,10 @@ class DatabaseSeeder extends Seeder
             ListingSeeder::class
         ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
 
-        Listing::factory()->create([
-            'title' => 'web developer',
-            'description' => 'n/a',
-        ]);
+//        Listing::factory()->create([
+//            'title' => 'web developer',
+//            'description' => 'n/a',
+//        ]);
     }
 }

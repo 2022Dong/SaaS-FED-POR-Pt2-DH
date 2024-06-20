@@ -26,11 +26,14 @@ class ListingController extends Controller
 
     /**
      * Get listings data
+     *
+     * @param $quantity
+     * @return array
      */
-    public function getListings(): array
+    public function getListings($quantity = 6): array
     {
         //$listings = Listing::all();
-        $listings = Listing::orderBy('created_at', 'desc')->paginate(6);
+        $listings = Listing::orderBy('created_at', 'desc')->paginate($quantity);
         $trashedCount = Listing::onlyTrashed()->latest()->get()->count();
         return compact('listings', 'trashedCount');
     }
@@ -51,14 +54,16 @@ class ListingController extends Controller
      */
     public function adminIndex(): View
     {
-        $listings = $this->getListings();
+        $listings = $this->getListings(24);
         return view('listings.admin-index', $listings);
     }
 
     /**
      * Show the form for creating a new resource.
+     *
+     * @return View|RedirectResponse
      */
-    public function create()
+    public function create(): View|RedirectResponse
     {
         if (
             auth()->user()->roles->pluck('name')->contains('Client')
@@ -75,64 +80,15 @@ class ListingController extends Controller
      */
     public function store(StoreListingRequest $request)
     {
-        // Validate
-        $rules = [
-            'title' => [
-                'string',
-                'required',
-                'min:5',
-                'max:200'
-            ],
-            'description' => [
-                'required',
-            ],
-            'salary' => [
-                'string',
-                'required',
-            ],
-            'tags' => [
-                'string',
-                'required',
-            ],
-            'company' => [
-                'string',
-                'required',
-            ],
-            'address' => [
-                'string',
-                'required',
-            ],
-            'city' => [
-                'string',
-                'required',
-            ],
-            'state' => [
-                'string',
-                'required',
-            ],
-            'phone' => [
-                'string',
-                'required',
-            ],
-            'email' => [
-                'string',
-                'required',
-            ],
-            'requirements' => [
-                'required',
-            ],
-            'benefits' => [
-                'required',
-            ]
-        ];
-
         // Validate request data
-        $validated = $request->validate($rules);
+        $validated = $request->validated();
 
         // Add the authenticated user's ID to the validated data
         $validated['user_id'] = auth()->id();
 
         // Store the listing
+        // From Adrian's GitHub Example: http://...
+        //
         $listing = Listing::create($validated);
 
         // Redirect to listings index with success message
@@ -164,6 +120,7 @@ class ListingController extends Controller
     {
         //Gate::authorize('update', $listing);
         // Validate
+        // TODO: Move this to ../Requests/UpdateListingRequest.php
         $rules = [
             'title' => [
                 'string',
@@ -219,7 +176,6 @@ class ListingController extends Controller
         // Store
         $listing->update(
             $validated
-
         );
 
         return redirect(route('listings.show', $listing))
