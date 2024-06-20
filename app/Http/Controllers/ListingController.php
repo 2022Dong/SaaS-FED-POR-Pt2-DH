@@ -25,21 +25,34 @@ class ListingController extends Controller
     // }
 
     /**
-     * Display a listing of the resource.
+     * Get listings data
      */
-    public function index()
+    public function getListings(): array
     {
         //$listings = Listing::all();
         $listings = Listing::orderBy('created_at', 'desc')->paginate(6);
         $trashedCount = Listing::onlyTrashed()->latest()->get()->count();
-        return view('listings.index', compact(['listings', 'trashedCount',]));
+        return compact('listings', 'trashedCount');
     }
 
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(): View
+    {
+        $listings = $this->getListings();
+        return view('listings.index', $listings);
+    }
+
+    /**
+     * Display listings in the Mangage Listings view
+     *
+     * @return View
+     */
     public function adminIndex(): View
     {
-        $listings = Listing::orderBy('created_at', 'desc')->paginate(6);
-        $trashedCount = Listing::onlyTrashed()->latest()->get()->count();
-        return view('listings.admin-index', compact(['listings', 'trashedCount',]));
+        $listings = $this->getListings();
+        return view('listings.admin-index', $listings);
     }
 
     /**

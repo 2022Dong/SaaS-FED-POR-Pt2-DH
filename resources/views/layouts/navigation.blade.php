@@ -11,9 +11,11 @@
                 <x-nav-link :href="route('listings.index')" :active="request()->routeIs('listings.*')" class="group">
                     {{ __('Listings') }}
                 </x-nav-link>
+                @can('listing-edit')
                 <x-nav-link :href="route('listings.admin-index')" :active="request()->routeIs('listings.admin-index')" class="group">
                     {{ __('Manage Listings') }}
                 </x-nav-link>
+                @endcan
                 <x-nav-link :href="route('pricing')" :active="request()->routeIs('/')" class="group">
                     {{ __('Pricing') }}
                 </x-nav-link>
