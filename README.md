@@ -85,11 +85,11 @@ To install the project, follow these steps:
 1. Update PHP, MailPit, and Apache on the new host.
 2. Create an account using your student email at [this link](https://l306-01.local/fs/register.php). Password requirements: at least 1 Capital, 1 Lower case, 1 Number, and 1 Symbol, and at least 8 characters long.
 3. Download the required files from [http://l306-01.local/fs](http://l306-01.local/fs) using these links:
-    - [File 1](https://l306-01.local/fs/process.php?do=download&id=61)
-    - [File 2](https://l306-01.local/fs/process.php?do=download&id=55)
-    - [File 3](https://l306-01.local/fs/process.php?do=download&id=36)
-4. Install the files into the required place using the instructions at [this link](https://help.screencraft.net.au/hc/2680392001/68/update-the-apache-web-server-in-laragon?category_id=29).
-5. Make sure that Laragon is correctly added to the system path by following the instructions at [this link](https://help.screencraft.net.au/hc/2680392001/36/adding-laragon-to-the-system-path?category_id=29).
+    - https://l306-01.local/fs/process.php?do=download&id=61
+    - https://l306-01.local/fs/process.php?do=download&id=55
+    - https://l306-01.local/fs/process.php?do=download&id=36
+4. Install the files into the required place using the instructions at [https://help.screencraft.net.au...](https://help.screencraft.net.au/hc/2680392001/68/update-the-apache-web-server-in-laragon?category_id=29).
+5. Make sure that Laragon is correctly added to the system path by following the instructions at [https://help.screencraft.net.au...](https://help.screencraft.net.au/hc/2680392001/36/adding-laragon-to-the-system-path?category_id=29).
 
 ### Cloning Repository and Setting Up Environment
 
@@ -133,16 +133,14 @@ To install the project, follow these steps:
     ```
     npm i && npm update && npm run dev
     ```
-18. Installation Spatie in Laravel, for roles and permissions
-    ```
+18. Installation Spatie in Laravel, for roles and permissions. 
     Follow the doc. [Spatie.be](https://spatie.be/docs/laravel-permission/v6/installation-laravel).
-    ```
 
 ### Completing Installation
 
-18. Open Laragon and follow the instructions [here](https://help.screencraft.net.au/hc/2680392001/61/change-the-laragon-web-root-folder?category_id=29).
+18. Open Laragon and follow the instructions [https://help.screencraft.net.au/...](https://help.screencraft.net.au/hc/2680392001/61/change-the-laragon-web-root-folder?category_id=29).
 19. Start Laragon's services (Start all button).
-20. Open your browser and visit your repository's folder name with `.test` at the end. For example: [http://SaaS-FED-App.test](http://SaaS-FED-App.test).
+20. Open your browser and visit your repository's folder name with `.test` at the end. For example: [http://SaaS-FED-POR-Pt2-DH.test](http://SaaS-FED-POR-Pt2-DH.test).
 21. Start MailPit (ready for verification of new account):
     ```
     /c/Laragon/bin/mailpit/mailpit.exe --smtp=0.0.0.0:2525
