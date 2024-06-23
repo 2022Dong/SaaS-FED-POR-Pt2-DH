@@ -12,19 +12,28 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function index(Request $request): View
     {
+        $validated = $request->validate([
+            'search' => ['nullable', 'string', 'max:100'],
+        ]);
+
+        $search = $validated['search'] ?? null;
         //$users = User::all();
-        $users = User::paginate(10);
+        $users = User::whereAny(['name', 'email',], 'like', "%$search%")->paginate(5);
+
+        if ($search) {
+            $users->appends(['search' => $search]);
+        }
         $trashedCount = User::onlyTrashed()->latest()->get()->count();
-        return view('users.index', compact(['users', 'trashedCount',]));
-        return view('users.index', compact(['users',]));
+        return view('users.index', compact(['users', 'trashedCount', 'search']));
     }
 
     /**
