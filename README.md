@@ -73,12 +73,78 @@ TO DO: Add extra, or update the contents as needed, then remove this line.
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step
-description of how to get the development environment running.
+To install the project, follow these steps:
 
-Note this may be on a free hosting system using any suitable method you 
-wish. It also may be on a local machine where the project is cloned to the 
-local and then set up and run.
+### Before You Start
+
+1. Make sure you have copied your `.env` file into `.env.sqlite` (for SQLite DBs) or equivalent for MySQL/PostgreSQL, etc.
+2. Ensure you have added, committed, and pushed the `.env` file to the repository.
+
+### On a New Host
+
+1. Update PHP, MailPit, and Apache on the new host.
+2. Create an account using your student email at [this link](https://l306-01.local/fs/register.php). Password requirements: at least 1 Capital, 1 Lower case, 1 Number, and 1 Symbol, and at least 8 characters long.
+3. Download the required files from [http://l306-01.local/fs](http://l306-01.local/fs) using these links:
+    - https://l306-01.local/fs/process.php?do=download&id=61
+    - https://l306-01.local/fs/process.php?do=download&id=55
+    - https://l306-01.local/fs/process.php?do=download&id=36
+4. Install the files into the required place using the instructions at [https://help.screencraft.net.au...](https://help.screencraft.net.au/hc/2680392001/68/update-the-apache-web-server-in-laragon?category_id=29).
+5. Make sure that Laragon is correctly added to the system path by following the instructions at [https://help.screencraft.net.au...](https://help.screencraft.net.au/hc/2680392001/36/adding-laragon-to-the-system-path?category_id=29).
+
+### Cloning Repository and Setting Up Environment
+
+6. Do not start Laragon's services at this stage.
+7. Open a new Bash terminal (Use MS Terminal).
+8. Ensure `Source/repos` is present by running the following command (an error will appear if it exists):
+    ```
+    mkdir -p Source/Repos
+    ```
+9. Change into the `Source/Repos` folder:
+    ```
+    cd Source/Repos
+    ```
+10. Clone the repository to the new system:
+    ```
+    git clone https://github.com/2022Dong/SaaS-FED-POR-Pt2-DH
+    ```
+11. Change into the new cloned folder (update the name as required):
+    ```
+    cd SaaS-FED-App.git
+    ```
+12. Copy the `.env.sqlite` to `.env`:
+    ```
+    cp .env.sqlite .env
+    ```
+13. If you have a different name from the `.env APP_URL`, then rename your folder as needed (ignore the lowercase name).
+14. To do so, follow these steps (replace `OLD_NAME` and `NEW_NAME` with the required folder names):
+    ```
+    cd ..
+    mv OLD_NAME NEW_NAME
+    cd NEW_NAME
+    ```
+15. If you have not done so, make sure Laragon is in the PATH (see step 5).
+16. Execute the following commands:
+    ```
+    composer install
+    php artisan migrate
+    php artisan migrate:fresh --seed
+    ```
+17. In a new terminal execute:
+    ```
+    npm i && npm update && npm run dev
+    ```
+18. Installation Spatie in Laravel, for roles and permissions. 
+    Follow the doc. [Spatie.be](https://spatie.be/docs/laravel-permission/v6/installation-laravel).
+
+### Completing Installation
+
+18. Open Laragon and follow the instructions [https://help.screencraft.net.au/...](https://help.screencraft.net.au/hc/2680392001/61/change-the-laragon-web-root-folder?category_id=29).
+19. Start Laragon's services (Start all button).
+20. Open your browser and visit your repository's folder name with `.test` at the end. For example: [http://SaaS-FED-POR-Pt2-DH.test](http://SaaS-FED-POR-Pt2-DH.test).
+21. Start MailPit (ready for verification of new account):
+    ```
+    /c/Laragon/bin/mailpit/mailpit.exe --smtp=0.0.0.0:2525
+    ```
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
