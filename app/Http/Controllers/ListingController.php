@@ -118,60 +118,7 @@ class ListingController extends Controller
      */
     public function update(UpdateListingRequest $request, Listing $listing)
     {
-        //Gate::authorize('update', $listing);
-        // Validate
-        // TODO: Move this to ../Requests/UpdateListingRequest.php
-        $rules = [
-            'title' => [
-                'string',
-                'required',
-                'min:5',
-                'max:200'
-            ],
-            'description' => [
-                'required',
-            ],
-            'salary' => [
-                'string',
-                'required',
-            ],
-            'tags' => [
-                'string',
-                'required',
-            ],
-            'company' => [
-                'string',
-                'required',
-            ],
-            'address' => [
-                'string',
-                'required',
-            ],
-            'city' => [
-                'string',
-                'required',
-            ],
-            'state' => [
-                'string',
-                'required',
-            ],
-            'phone' => [
-                'string',
-                'required',
-            ],
-            'email' => [
-                'string',
-                'required',
-            ],
-            'requirements' => [
-                'required',
-            ],
-            'benefits' => [
-                'required',
-            ],
-
-        ];
-        $validated = $request->validate($rules);
+        $validated = $request->validated();
 
         // Store
         $listing->update(

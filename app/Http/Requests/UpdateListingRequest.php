@@ -12,6 +12,13 @@ class UpdateListingRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+
+        // $user = auth()->user();
+        // $listing = $this->route('listing');
+        // if ($user->hasAnyRole(['Staff', 'Super-Admin', 'Admin']) || ($user->hasRole('Client') && $user->id == $listing->user_id)) {
+        //     return true;
+        // }
+        // return false;        
     }
 
     /**
@@ -22,7 +29,57 @@ class UpdateListingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+
+            'title' => [
+                'string',
+                'required',
+                'min:5',
+                'max:200'
+            ],
+            'description' => [
+                'required',
+            ],
+            'salary' => [
+                'string',
+                'required',
+            ],
+            'tags' => [
+                'string',
+                'required',
+            ],
+            'company' => [
+                'string',
+                'required',
+            ],
+            'address' => [
+                'string',
+                'required',
+            ],
+            'city' => [
+                'string',
+                'required',
+            ],
+            'state' => [
+                'string',
+                'required',
+            ],
+            'phone' => [
+                'string',
+                'required',
+            ],
+            'email' => [
+                'string',
+                'required',
+            ],
+            'requirements' => [
+                'required',
+            ],
+            'benefits' => [
+                'required',
+            ],
+            'status' => [
+                'string',
+            ]
         ];
     }
 }

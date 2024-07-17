@@ -69,6 +69,9 @@ class StoreListingRequest extends FormRequest
             ],
             'benefits' => [
                 'required',
+            ],
+            'status' => [
+                'string',
             ]
         ];
     }

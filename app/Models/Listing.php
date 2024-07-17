@@ -30,5 +30,6 @@ class Listing extends Model
         'email',
         'requirements',
         'benefits',
+        'status'
     ];
 }
