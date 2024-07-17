@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('requirements');
             $table->text('benefits');
             $table->timestamps(); // created_at and updated_at
+            $table->string('status');
         });
     }
 

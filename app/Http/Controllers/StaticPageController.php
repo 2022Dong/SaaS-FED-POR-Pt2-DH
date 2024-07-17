@@ -10,9 +10,9 @@ class StaticPageController extends Controller
     // Add Welcome Method to the Class
     public function welcome()
     {
-        $latestListings = Listing::latest()->take(6)->get();
-        // TODO: Challenge - can you get 6 RANDOM listings that are current.
-        return view('pages.welcome', compact('latestListings'));
+        // Get 6 random listings that are current
+        $randomListings = Listing::where('status', 'current')->inRandomOrder()->take(6)->get();
+        return view('pages.welcome', compact('randomListings'));
     }
 
     public function about()
