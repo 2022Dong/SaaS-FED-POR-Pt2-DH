@@ -34,7 +34,7 @@
         </section>
 
         <section id="footerNav" class="flex flex-col sm:flex-row gap-1 -ml-1">
-            <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')" class="group">
+            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="group">
                 {{ __('Dashboard') }}
             </x-nav-link>
             <x-nav-link :href="route('listings.index')" :active="request()->routeIs('listings.*')" class="group">

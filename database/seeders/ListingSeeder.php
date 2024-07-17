@@ -32,6 +32,7 @@ class ListingSeeder extends Seeder
                 'requirements' => 'Bachelor\'s degree in Computer Science, Mathematics, or related field; 3+ years of experience in data science or analytics; Proficiency in Python, R, and SQL; Strong analytical and problem-solving skills; Excellent communication and teamwork abilities',
                 'benefits' => 'Competitive salary; Flexible work arrangements; Health and wellness benefits; Ongoing learning and development opportunities',
                 'created_at' => Carbon::parse('2024-04-24 09:30:00'),
+                'status' => 'current',
             ],
             [
                 'user_id' => 111,
@@ -48,6 +49,7 @@ class ListingSeeder extends Seeder
                 'requirements' => 'Bachelor\'s degree in Mining Engineering or related field; 3+ years of experience in the mining industry; Knowledge of mine planning and scheduling software; Strong safety focus; Excellent teamwork and communication skills',
                 'benefits' => 'Competitive salary; Performance-based bonuses; Opportunities for career progression; Employee assistance program; Health and wellness initiatives',
                 'created_at' => Carbon::parse('2024-04-26 09:45:00'),
+                'status' => 'outdated',
             ],
             [
                 'user_id' => 111,
@@ -64,6 +66,7 @@ class ListingSeeder extends Seeder
                 'requirements' => 'Bachelor\'s degree in Civil Engineering or related field; 5+ years of experience in civil engineering; Knowledge of relevant software such as AutoCAD and Civil 3D; Strong problem-solving abilities; Excellent project management skills',
                 'benefits' => 'Competitive salary; Opportunities for career advancement; Supportive work environment; Health and wellness programs; Employee training and development',
                 'created_at' => Carbon::parse('2024-04-25 10:00:00'),
+                'status' => 'current',
             ],
             [
                 'user_id' => 111,
@@ -80,6 +83,7 @@ class ListingSeeder extends Seeder
                 'requirements' => 'Bachelor\'s degree in Computer Science, Mathematics, or related field; 3+ years of experience in data science or analytics; Proficiency in Python, R, and SQL; Strong analytical and problem-solving skills; Excellent communication and teamwork abilities',
                 'benefits' => 'Competitive salary; Flexible work arrangements; Health and wellness benefits; Ongoing learning and development opportunities',
                 'created_at' => Carbon::parse('2024-04-24 09:30:00'),
+                'status' => 'current',
             ],
             [
                 'user_id' => 111,
@@ -96,6 +100,7 @@ class ListingSeeder extends Seeder
                 'requirements' => 'Bachelor\'s degree in Computer Science or related field; 3+ years of experience in software development; Proficiency in Java, Python, and SQL; Strong problem-solving skills; Excellent teamwork and communication abilities',
                 'benefits' => 'Competitive salary; Flexible work arrangements; Opportunities for career growth; Health and wellness benefits; Professional development programs',
                 'created_at' => Carbon::parse('2024-05-01 10:30:00'),
+                'status' => 'current',
             ],
             [
                 'user_id' => 111,
@@ -111,7 +116,8 @@ class ListingSeeder extends Seeder
                 'email' => 'jobs@compassionatecarehospital.com.au',
                 'requirements' => 'Bachelor\'s degree in Nursing; Current registration as a Registered Nurse with AHPRA; Experience in acute care preferred; Strong clinical assessment and decision-making skills; Compassionate and patient-centered approach',
                 'benefits' => 'Competitive salary; Shift allowances; Professional development opportunities; Supportive work environment; Employee assistance program',
-                'created_at' => Carbon::now()->subHours(random_int(1,24*7*6)),
+                'created_at' => Carbon::now()->subHours(random_int(1, 24 * 7 * 6)),
+                'status' => 'current',
             ],
             [
                 'user_id' => 111,
@@ -127,7 +133,8 @@ class ListingSeeder extends Seeder
                 'email' => 'careers@capitalinsightgroup.com.au',
                 'requirements' => 'Bachelor\'s degree in Finance, Accounting, or related field; 5+ years of experience in financial analysis; Advanced Excel skills; Strong analytical and problem-solving abilities; Excellent communication and presentation skills',
                 'benefits' => 'Competitive salary; Performance-based bonuses; Opportunities for career advancement; Health and wellness benefits; Flexible work arrangements',
-                'created_at' => Carbon::now()->subHours(random_int(1,24*7*6)),
+                'created_at' => Carbon::now()->subHours(random_int(1, 24 * 7 * 6)),
+                'status' => 'current',
             ],
         ];
 

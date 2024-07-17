@@ -36,7 +36,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            @foreach ($latestListings as $listing)
+            @foreach ($randomListings as $listing)
             <div class="rounded-lg shadow-md bg-white">
                 <div class="p-4">
                     <h2 class="text-xl font-semibold">{{ $listing->title }}</h2>
